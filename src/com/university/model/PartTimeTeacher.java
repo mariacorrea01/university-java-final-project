@@ -13,6 +13,11 @@ public class PartTimeTeacher extends Teacher {
         return getBasesalary()*activeHoursPerWeek;
     }
 
+    @Override
+    public String type() {
+        return "Part Time";
+    }
+
     public int getActiveHoursPerWeek() {
         return activeHoursPerWeek;
     }

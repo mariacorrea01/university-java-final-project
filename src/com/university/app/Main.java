@@ -3,7 +3,6 @@ package com.university.app;
 
 import com.university.model.*;
 import com.university.service.University;
-
 import java.util.Scanner;
 
 public class Main {
@@ -19,16 +18,30 @@ public class Main {
         Student student3 = new Student(19, "Sofia Gomez", 23779845);
         Student student4 = new Student(22, "Diego Ramirez", 1010041678);
         Student student5 = new Student(20, "Valentina Cruz", 1022387654);
-        Student student6 = new Student(23, "Andres Castro",1023456782 );
+        Student student6 = new Student(23, "Andres Castro", 1023456782);
         UniversityClass class1 = new UniversityClass("Java Basics", "Room 101", teacher1);
         UniversityClass class2 = new UniversityClass("Databases", "Room 102", teacher2);
         UniversityClass class3 = new UniversityClass("Web Development", "Room 103", teacher3);
-        UniversityClass c4 = new UniversityClass("Algorithms", "Room 104", teacher4);
+        UniversityClass class4 = new UniversityClass("Algorithms", "Room 104", teacher4);
+        university.addStudents(student1);
+        university.addStudents(student2);
+        university.addStudents(student3);
+        university.addStudents(student4);
+        university.addStudents(student5);
+        university.addStudents(student6);
+        university.addTeacher(teacher1);
+        university.addTeacher(teacher2);
+        university.addTeacher(teacher3);
+        university.addTeacher(teacher4);
+        university.addClasses(class1);
+        university.addClasses(class2);
+        university.addClasses(class3);
+        university.addClasses(class4);
 
         Scanner sc = new Scanner(System.in);
-        int opcion=0;
+        int opcion = 0;
 
-        while (opcion!=6) {
+        while (opcion != 6) {
             System.out.println("Bienvenidos al sistema de gestion academica Universitaria");
             System.out.println("---------------------------------------------");
             System.out.println("Seleccione la opcion que desee: ");
@@ -44,34 +57,84 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-
-                case 2:
-                    int opcionSubmenu = 0;
-                    while (opcionSubmenu != 3) {
-                        System.out.println("Bienvenido al submenu");
-                        System.out.println("1. Listar todas las clases");
-                        System.out.println("2. Seleccionar una clase y ver sus datos");
-                        System.out.println("3. Volver al menu principal");
-                        System.out.println("Seleccione una opcion: ");
-                        opcionSubmenu = sc.nextInt();
-                        switch (opcionSubmenu) {
-                            case 1:
-
-                            case 2:
-
-                            case 3:
-                                System.out.println("Regresando al menú principal...");
-                                break;
-
-                            default:
-                                System.out.println("Seleccionaste una opcion incorrecta.");
-                        }
-
+                    System.out.println("Profesores : ");
+                    for (Teacher t : university.getTeachers()) {
+                        System.out.println("Nombre Profesor :" + t.getName());
+                        System.out.println("Tipo de Profesor :" + t.type());
+                        System.out.println("Salario: " + t.calculateSalary() + "\n");
                     }
+                    break;
+                case 2:
+                    System.out.println("Clases disponibles");
+                    for (int i = 0; i < university.getClasses().size(); i++) {
+                        System.out.println((i + 1) + ". " + university.getClasses().get(i).getName());
+                    }
+                    int opcionSubmenu = 0;
+                    while (opcionSubmenu != 2) {
+                        System.out.println("SUB-MENU");
+                        System.out.println("1.Selecciona una clase para ver sus detalles.");
+                        System.out.println("2.Volver al menu anterior.");
+                        System.out.println("Elige una opcion: ");
+                        opcionSubmenu = sc.nextInt();
+                        if (opcionSubmenu == 1) {
+                            System.out.println("Dime el numero de la clase :");
+                            int numero = sc.nextInt() - 1;
+                            if (numero >= 0 && numero < university.getClasses().size()) {
+                                UniversityClass clase = university.getClasses().get(numero);
+
+                                System.out.println("\n-Nombre: " + clase.getName());
+                                System.out.println("Salon: " + clase.getClassroom());
+                                System.out.println("Profesor: " + clase.getTeacher().getName() + " (" + clase.getTeacher().type() + ")");
+                                System.out.println("Estudiantes: :");
+                                for (Student student : clase.getStudents()) {
+                                    System.out.println(student.getName());
+                                }
+                            } else {
+                                System.out.println("No existe una clase asociada.");
+                            }
+                        } else if (opcionSubmenu == 2) {
+                            break;
+                        } else {
+                            System.out.println("Opcion invalidad");
+                        }
+                    }
+                    break;
+                case 3:
+                    sc.nextLine();
+                    System.out.println("Crea un nuevo Estudiante: ");
+                    System.out.println("Ingrea el nombre: ");
+                    String name = sc.nextLine();
+                    System.out.println("Ingrea la edad :");
+                    int age = sc.nextInt();
+                    System.out.println("Ingrese el id: ");
+                    int id = sc.nextInt();
+                    Student estudiante = new Student(age, name, id);
+                    university.addStudents(estudiante);
+                    System.out.println("Ahora debes agregarlo a una clase existente: ");
+                    for (int i = 0; i < university.getClasses().size(); i++) {
+                        System.out.println((i + 1) + ". " + university.getClasses().get(i).getName());
+                    }
+                    System.out.println("Selecciona a cual clase quieres agregarlo : ");
+                    int numero = sc.nextInt()-1;
+
+                    if (numero >= 0 && numero < university.getClasses().size()) {
+                        university.getClasses().get(numero).addStudent(estudiante);
+                        System.out.println("Estudiante agregado a la clase.");
+                    } else { System.out.println("Numero de clase invalido.");
+                    }
+                    break;
+                case 4:
+
+                    break;
+
+
+                case 5:
+                    break;
 
 
             }
 
         }
     }
-    }
+
+}

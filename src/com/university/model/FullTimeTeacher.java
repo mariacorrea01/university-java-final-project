@@ -15,6 +15,11 @@ public class FullTimeTeacher extends Teacher {
         return getBasesalary()*experience;
     }
 
+    @Override
+    public String type() {
+        return "Full Time";
+    }
+
     public int getExperienceYears() {
         return experienceYears;
     }
