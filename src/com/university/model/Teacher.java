@@ -3,7 +3,7 @@ package com.university.model;
 public abstract class Teacher {
     private String name;
     private double basesalary;
-    private  int totalTeachers;
+    private static int totalTeachers;
 
     public Teacher(String name, double Basesalary){
         this.name=name;
@@ -16,10 +16,10 @@ public abstract class Teacher {
     }
 
     public void setBasesalary(double basesalary) {
-        basesalary = basesalary;
+        this.basesalary = basesalary;
     }
 
-    public String getName() {
+        public String getName() {
         return name;
     }
 
@@ -27,13 +27,8 @@ public abstract class Teacher {
         this.name = name;
     }
 
-    public int getTotalTeachers() {
-        return totalTeachers;
-    }
+    public static int getTotalTeachers() { return totalTeachers; }
 
-    public void setTotalTeachers(int totalTeachers) {
-        totalTeachers = totalTeachers;
-    }
 
     public abstract double calculateSalary();
     public abstract String type();

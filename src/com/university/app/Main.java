@@ -72,6 +72,7 @@ public class Main {
                         System.out.println("Tipo de Profesor :" + t.type());
                         System.out.println("Salario: " + t.calculateSalary() + "\n");
                     }
+                    System.out.println("Total de profesores: " + Teacher.getTotalTeachers());
                     break;
                 case 2:
                     System.out.println("Clases disponibles");
