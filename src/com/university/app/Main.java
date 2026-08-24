@@ -37,6 +37,15 @@ public class Main {
         university.addClasses(class2);
         university.addClasses(class3);
         university.addClasses(class4);
+        class1.addStudent(student1);
+        class1.addStudent(student2);
+        class2.addStudent(student2);
+        class2.addStudent(student3);
+        class3.addStudent(student4);
+        class3.addStudent(student1);
+        class4.addStudent(student5);
+        class4.addStudent(student6);
+
 
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
@@ -95,7 +104,7 @@ public class Main {
                         } else if (opcionSubmenu == 2) {
                             break;
                         } else {
-                            System.out.println("Opcion invalidad");
+                            System.out.println("Opcion invalida");
                         }
                     }
                     break;
@@ -124,11 +133,62 @@ public class Main {
                     }
                     break;
                 case 4:
+                    sc.nextLine();
+                    System.out.println("Ingrese el nombre de la nueva clase: ");
+                    String nameC = sc.nextLine();
+                    System.out.println("Ingrese el salon asignado: ");
+                    String classroom = sc.nextLine();
+                    System.out.println("Profesores disponibles:");
+                    System.out.println("Asigna un profesor: ");
+                    for (int i = 0; i < university.getTeachers().size(); i++) {
+                        System.out.println((i+1) + ". " + university.getTeachers().get(i).getName());
+                    }
+                    int numeroProfesor = sc.nextInt()-1;
+                    if (numeroProfesor < 0 || numeroProfesor >= university.getTeachers().size()) {
+                        System.out.println("Numero de profesor invalido. Clase no creada.");
+                        break;
+                    }
+                    Teacher profesorElegido = university.getTeachers().get(numeroProfesor);
+                    UniversityClass newClass = new UniversityClass(nameC,classroom, profesorElegido);
+                    System.out.println("Estudiantes disponibles:");
+                    int totalEstudiantes = university.getStudents().size();
+                    for (int i = 0; i < totalEstudiantes; i++) {
+                        System.out.println((i+1) + ". " + university.getStudents().get(i).getName());
+                    }
+                    System.out.println((totalEstudiantes + 1) + ". Salir / terminar de agregar estudiantes");
+                    int numEstudiante = 0;
 
+                    while (numEstudiante != totalEstudiantes + 1) {
+                        System.out.println("Selecciona el numero del estudiante a agregar (o " + (totalEstudiantes + 1) + " para salir): ");
+                        numEstudiante = sc.nextInt();
+                        if (numEstudiante == totalEstudiantes + 1) {
+                            break;
+                        } if (numEstudiante >= 1 && numEstudiante <= totalEstudiantes) {
+                            newClass.addStudent(university.getStudents().get(numEstudiante - 1));
+                            System.out.println("Estudiante agregado.");
+                        } else { System.out.println("Numero invalido.");
+                        }
+                    }
+                    university.addClasses(newClass);
                     break;
 
-
                 case 5:
+                    System.out.println("Ingresa el ID del estudiante: ");
+                    int idBuscado = sc.nextInt();
+                    System.out.println("Clases donde aparece el estudiante con ID " + idBuscado + ":");
+                    boolean encontrado = false;
+                    for (UniversityClass c : university.getClasses()) {
+                        for (Student s : c.getStudents()) {
+                            if (s.getId() == idBuscado) {
+                                System.out.println(c.getName());
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!encontrado) {
+                        System.out.println("Este estudiante no esta inscrito en ninguna clase, o el ID no existe.");
+                    }
                     break;
 
 
