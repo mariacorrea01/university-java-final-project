@@ -1,7 +1,7 @@
 package com.university.model;
 
 public class PartTimeTeacher extends Teacher {
-    int activeHoursPerWeek;
+    private int activeHoursPerWeek;
 
     public PartTimeTeacher(String name, double basesalary, int activeHoursPerWeek){
         super(name,basesalary);
@@ -11,5 +11,13 @@ public class PartTimeTeacher extends Teacher {
     @Override
     public double calculateSalary() {
         return getBasesalary()*activeHoursPerWeek;
+    }
+
+    public int getActiveHoursPerWeek() {
+        return activeHoursPerWeek;
+    }
+
+    public void setActiveHoursPerWeek(int activeHoursPerWeek) {
+        this.activeHoursPerWeek = activeHoursPerWeek;
     }
 }
