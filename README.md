@@ -20,9 +20,9 @@ Console-based Java application to manage a university's teachers, students and c
 - **Static attributes/methods**: `Teacher.totalTeachers` (static attribute) and `Teacher.getTotalTeachers()` (static method).
 - **Main class**: `com.university.app.Main`.
 - **Packages and layers**:
-    - `com.university.model` — data classes only (`Teacher`, `FullTimeTeacher`, `PartTimeTeacher`, `Student`, `UniversityClass`)
-    - `com.university.service` — business logic (`University`)
-    - `com.university.app` — entry point and console menu (`Main`)
+  - `com.university.model` — data classes only (`Teacher`, `FullTimeTeacher`, `PartTimeTeacher`, `Student`, `UniversityClass`)
+  - `com.university.service` — business logic (`University`)
+  - `com.university.app` — entry point and console menu (`Main`)
 - **Reading and printing** happen entirely in `Main` (app layer), never inside the model classes.
 
 ## Salary rules
@@ -50,4 +50,4 @@ java -cp out com.university.app.Main
 
 ## Design diagram
 
-See the design diagram in the `diagram/` folder (or linked below).
+![UML Class Diagram](diagram/UML.png)
